@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,
+  images:  {
+    domains: ["files.stripe.com"],
+  }
 };
 
 export default nextConfig;
