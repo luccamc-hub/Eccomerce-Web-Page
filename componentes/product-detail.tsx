@@ -2,16 +2,16 @@
 
 import Stripe from "stripe";
 import Image from "next/image";
-import { useCartStore } from "../store/cart-store";
+import { useCartStore } from "@/store/cart-store";
 
 interface Props {
   product: Stripe.Product;
 }
 
 export const ProductDetail = ({ product }: Props) => {
-  const { items, addItem } = useCartStore();
+  const { items, addItem, removeItem } = useCartStore();
   const price = product.default_price as Stripe.Price;
-  const cartItem = items.find((item: { id: string; }) => item.id === product.id);
+  const cartItem = items.find((item) => item.id === product.id);
   const quantity = cartItem ? cartItem.quantity : 0;
 
   const onAddItem = () => {
@@ -48,10 +48,17 @@ export const ProductDetail = ({ product }: Props) => {
           </p>
         )}
         <div className="flex items-center space-x-4">
+          <button
+            type="button"
+            className="rounded-md border px-4 py-2"
+            onClick={() => removeItem(product.id)}
+          >
+            –
+          </button>
           <span className="text-lg font-semibold">{quantity}</span>
           <button
             type="button"
-            className="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700"
+            className="rounded-md bg-primary px-4 py-2 text-primary-foreground"
             onClick={onAddItem}
           >
             +
