@@ -4,6 +4,8 @@ Uma loja virtual moderna construída com **Next.js**, com catálogo de produtos 
 
 O projeto foi pensado para ser simples de entender e de evoluir: você cadastra os produtos no painel do Stripe e eles aparecem automaticamente na loja.
 
+Pode ser acessado por esse link também na web: eccomerce-web-page.vercel.app
+
 ---
 
 ## ✨ O que o projeto faz
