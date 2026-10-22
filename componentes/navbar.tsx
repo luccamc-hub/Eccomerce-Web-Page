@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Show, SignInButton, UserButton } from "@clerk/nextjs";
 import {
   ShoppingCartIcon,
   Bars3Icon,
@@ -51,12 +52,22 @@ export const Navbar = () => {
           <Link href="/carrinho" className="relative hover:text-blue-600">
             <ShoppingCartIcon className="h-6 w-6" />
             {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-black text-xs rounded-full h-5 w-5 flex items-center justify-center">
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                 {cartCount}
               </span>
             )}
           </Link>
 
+          <Show when="signed-out">
+            <SignInButton mode="modal">
+              <button type="button" className="hover:underline">
+                Entrar
+              </button>
+            </SignInButton>
+          </Show>
+          <Show when="signed-in">
+            <UserButton />
+          </Show>
           <button
             type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
@@ -77,7 +88,7 @@ export const Navbar = () => {
           <ul className="flex flex-col p-4 space-y-3">
             <li>
               <Link
-                href="/home"
+                href="/"
                 className="hover:text-blue-600"
                 onClick={() => setMobileOpen(false)}
               >

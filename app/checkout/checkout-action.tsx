@@ -1,10 +1,16 @@
 "use server";
 
+import { auth } from "@clerk/nextjs/server";
 import { stripe } from "@/lib/stripe";
 import { CartItem } from "@/store/cart-store"
 import { redirect } from "next/navigation";
 
 export const checkoutAction = async (formData: FormData) : Promise<void> => {
+        const { userId } = await auth();
+        if (!userId) {
+                redirect("/sign-in");
+        }
+
     const items = formData.get("items") as string
     const itemsArray = JSON.parse(items)
     const line_items = itemsArray.map((item: CartItem) => ({
